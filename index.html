@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4b0718">
+    <title>INVITACION DE BODA</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/music.css">
+    <link rel="stylesheet" href="css/invitation.css">
+    <link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/confirmation.css">
+</head>
+<body>
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <p>UNA HISTORIA DE AMOR</p>
+            <div class="monogram"><span>N</span><i>&</i><span>C</span></div>
+            <div class="loader-line"></div>
+            <p>PREPARANDO ALGO ESPECIAL</p>
+        </div>
+    </div>
+
+    <main id="app">
+        <section id="music-screen" class="screen active">
+            <div class="music-card">
+                <span class="eyebrow">UNA INVITACIÓN ESPECIAL</span>
+                <div class="music-monogram">N <i>&</i> C</div>
+                <h1>Una melodía para nuestra historia</h1>
+                <p>Elige la canción que acompañará este momento.</p>
+                <div id="song-list"></div>
+                <button id="enter-invitation" class="primary-button">ABRIR INVITACIÓN →</button>
+            </div>
+        </section>
+
+        <section id="cover-screen" class="screen">
+            <button id="open-menu" class="corner-menu">☰</button>
+            <div class="cover-content">
+                <span class="eyebrow">TENEMOS EL HONOR DE INVITARTE</span>
+                <h1 data-name="bride">NICOL</h1>
+                <div class="script-ampersand">&</div>
+                <h1 data-name="groom">CAMILO</h1>
+                <p>DOS CORAZONES. UNA HISTORIA. PARA SIEMPRE.</p>
+                <p>14 DE JUNIO · 2027</p>
+                <button data-go="story" class="outline-button">DESCUBRIR NUESTRA HISTORIA ↓</button>
+            </div>
+        </section>
+
+        <section id="story-screen" class="screen">
+            <div class="editorial-copy">
+                <span class="eyebrow">01 — NOSOTROS</span>
+                <h2>Nuestra historia</h2>
+                <p id="story-text">Todo comenzó de una manera inesperada. Una mirada, una conversación y el inicio de nuestra historia favorita.</p>
+                <p class="handwritten">El amor más bonito es el que se comparte. ♡</p>
+                <button data-go="details" class="text-button">CONTINUAR →</button>
+            </div>
+            <div class="story-photo photo-background" data-image="couple"></div>
+        </section>
+
+        <section id="details-screen" class="screen">
+            <div class="details-photo photo-background" data-image="details"></div>
+            <div class="editorial-copy">
+                <span class="eyebrow">02 — DETALLES</span>
+                <h2>Cuándo y dónde</h2>
+                <p data-full-date>14 de junio de 2027</p>
+                <p data-time>16:00 horas</p>
+                <p data-venue>Jardín de los Sueños</p>
+                <p data-address>Ciudad de Guatemala</p>
+                <a id="map-link" class="outline-button" href="https://maps.google.com/" target="_blank" rel="noopener">VER UBICACIÓN ↗</a>
+                <button data-go="schedule" class="text-button">VER PROGRAMA →</button>
+            </div>
+        </section>
+
+        <section id="schedule-screen" class="screen">
+            <div class="schedule-photo photo-background" data-image="reception"></div>
+            <div class="editorial-copy">
+                <span class="eyebrow">03 — CELEBREMOS JUNTOS</span>
+                <h2>Cómo será el gran día</h2>
+                <div class="timeline">
+                    <p>16:00 — Recepción</p>
+                    <p>17:00 — Ceremonia</p>
+                    <p>18:00 — Brindis</p>
+                    <p>19:00 — Banquete</p>
+                    <p>21:00 — Pastel</p>
+                    <p>22:00 — Baile ♡</p>
+                </div>
+                <button data-go="rsvp" class="text-button">CONFIRMAR ASISTENCIA →</button>
+            </div>
+        </section>
+
+        <section id="rsvp-screen" class="screen">
+            <div class="rsvp-content">
+                <span class="eyebrow">04 — SERÍA UN HONOR</span>
+                <h2>¿Nos acompañas?</h2>
+                <p>Tu presencia hará este día aún más especial.</p>
+                <form id="rsvp-form">
+                    <label for="guest-name">TU NOMBRE</label>
+                    <input id="guest-name" name="name" required maxlength="100" placeholder="Nombre completo">
+                    <label for="guest-count">NÚMERO DE INVITADOS</label>
+                    <select id="guest-count" name="guests">
+                        <option value="1">1 persona</option>
+                        <option value="2">2 personas</option>
+                        <option value="3">3 personas</option>
+                        <option value="4">4 personas</option>
+                        <option value="5">5 personas</option>
+                    </select>
+                    <label for="attendance">ASISTENCIA</label>
+                    <select id="attendance" name="attendance">
+                        <option>Sí, asistiré</option>
+                        <option>No podré asistir</option>
+                    </select>
+                    <label for="guest-message">MENSAJE (OPCIONAL)</label>
+                    <textarea id="guest-message" name="message" placeholder="Tus buenos deseos"></textarea>
+                    <button type="submit" class="primary-button">CONFIRMAR POR WHATSAPP →</button>
+                </form>
+                <div id="rsvp-feedback"></div>
+                <button data-go="closing" class="text-button">FINALIZAR ♡</button>
+            </div>
+        </section>
+
+        <section id="closing-screen" class="screen">
+            <div class="closing-content">
+                <span class="eyebrow">GRACIAS POR SER PARTE</span>
+                <h2>Con amor,</h2>
+                <div class="closing-monogram">N <i>&</i> C</div>
+                <p>NICOL & CAMILO</p>
+                <p>El mejor capítulo de nuestra historia comienza contigo. ♡</p>
+                <button id="restart-button" class="outline-button">VOLVER AL INICIO ↺</button>
+            </div>
+        </section>
+
+        <div id="menu-overlay" class="menu-overlay">
+            <nav class="menu-panel">
+                <button id="close-menu" class="menu-close">×</button>
+                <span class="eyebrow">NUESTRA BODA</span>
+                <button data-go="cover">Portada</button>
+                <button data-go="story">Nuestra historia</button>
+                <button data-go="details">Cuándo y dónde</button>
+                <button data-go="schedule">Programa</button>
+                <button data-go="rsvp">Confirmar asistencia</button>
+                <button data-go="closing">Despedida</button>
+            </nav>
+        </div>
+
+        <button id="music-toggle" class="music-toggle">♫</button>
+        <div id="toast" class="toast"></div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/music.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/rsvp.js"></script>
+    <script src="js/app.js"></script>
+<section id="thanks-screen" aria-hidden="true">
+  <div class="thanks-card">
+    <span class="eyebrow">NICOL &amp; CAMILO · NUESTRA BODA</span>
+    <div class="thanks-monogram">N <i>&amp;</i> C</div>
+    <div class="thanks-divider"></div>
+    <span class="eyebrow">CON MUCHO CARIÑO</span>
+    <h2 id="thanks-heading">Gracias por acompañarnos</h2>
+    <p class="thanks-message" id="thanks-message">
+      Gracias por compartir con nosotros la alegría de este momento tan especial.
+      Nos sentimos felices de saber que formas parte de nuestra historia y de
+      poder celebrar contigo el comienzo de esta nueva etapa.
+    </p>
+    <div class="thanks-details">
+      <div id="thanks-guest"></div>
+      <div id="thanks-attendance"></div>
+      <div id="thanks-guests"></div>
+    </div>
+    <p class="handwritten">Con cariño, Nicol &amp; Camilo</p>
+    <div class="thanks-actions">
+      <button type="button" class="primary-button" id="share-confirmation">
+        CONFIRMAR ASISTENCIA POR WHATSAPP →
+      </button>
+      <button type="button" class="outline-button dark-button" id="download-card">
+        DESCARGAR TARJETA PNG ↓
+      </button>
+      <p class="thanks-status" id="thanks-status" aria-live="polite"></p>
+      <button type="button" class="thanks-back" id="edit-confirmation">
+        VOLVER A LA INVITACIÓN
+      </button>
+    </div>
+  </div>
+</section>
+</body>
+</html>
+

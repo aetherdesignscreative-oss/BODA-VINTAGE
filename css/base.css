@@ -1,0 +1,99 @@
+﻿* { box-sizing: border-box; }
+html { min-height: 100%; background: var(--wine-dark); }
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--wine-dark);
+    color: var(--ink);
+    font-family: var(--serif);
+    -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+}
+.app, main { min-height: 100vh; }
+.screen {
+    display: none;
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    width: 100%;
+    overflow: hidden;
+    isolation: isolate;
+}
+.screen.active {
+    display: flex;
+    animation: screen-enter 750ms var(--ease) both;
+}
+.eyebrow {
+    display: block;
+    font: 400 9px/1.8 var(--sans);
+    letter-spacing: .24em;
+    color: var(--muted);
+}
+.eyebrow.light { color: rgba(255,244,237,.82); }
+h1, h2, h3, p { margin-top: 0; }
+h1, h2 { font-weight: 400; }
+h2 {
+    font-size: clamp(38px, 6vw, 68px);
+    line-height: .98;
+    margin: 22px 0;
+}
+.primary-button, .outline-button {
+    min-height: 49px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px 20px;
+    font: 400 9px var(--sans);
+    letter-spacing: .15em;
+    text-decoration: none;
+    transition: all var(--transition);
+}
+.primary-button {
+    border: 1px solid var(--wine);
+    color: var(--ivory);
+    background: var(--wine);
+}
+.primary-button:hover { background: var(--wine-light); transform: translateY(-2px); }
+.outline-button { border: 1px solid currentColor; background: transparent; }
+.outline-button:hover { transform: translateY(-2px); background: rgba(255,255,255,.08); }
+.light-button { color: var(--ivory); }
+.dark-button { color: var(--wine); }
+.text-button {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0;
+    border: 0;
+    border-bottom: 1px solid var(--gold);
+    background: transparent;
+    font: 400 9px var(--sans);
+    letter-spacing: .15em;
+}
+.text-button span { font-size: 16px; transition: transform var(--transition); }
+.text-button:hover span { transform: translateX(5px); }
+.handwritten { font: 26px/1.2 var(--script); color: var(--wine); }
+.photo-background { background-color: #b4a29a; background-size: cover; background-position: center; }
+.toast {
+    position: fixed;
+    z-index: 120;
+    left: 50%;
+    bottom: 25px;
+    transform: translate(-50%, 15px);
+    opacity: 0;
+    pointer-events: none;
+    max-width: calc(100% - 30px);
+    padding: 14px 20px;
+    background: var(--ivory);
+    color: var(--wine);
+    box-shadow: 0 15px 50px #0003;
+    font: 11px/1.6 var(--sans);
+    transition: all var(--transition);
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }

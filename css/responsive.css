@@ -1,0 +1,23 @@
+﻿@media (min-width: 1100px) {
+    main { max-width: 1440px; margin: auto; }
+}
+@media (max-width: 700px) {
+    #story-screen.active, #details-screen.active, #schedule-screen.active {
+        display: flex;
+        flex-direction: column;
+    }
+    .editorial-copy { padding: 45px 28px; }
+    .story-photo { min-height: 48svh; order: -1; }
+    .details-photo { min-height: 34svh; }
+    .schedule-photo { min-height: 38svh; }
+    .cover-content { padding: 65px 20px; }
+    .music-card { padding: 27px 19px; }
+    .music-card h1 { font-size: 31px; }
+    .menu-panel { padding: 30px; }
+}
+@media (max-width: 380px) {
+    .cover-content h1 { font-size: 35px; }
+    .eyebrow { font-size: 8px; }
+    .song-info strong { font-size: 14px; }
+    .editorial-copy > p:not(.handwritten) { font-size: 15px; }
+}

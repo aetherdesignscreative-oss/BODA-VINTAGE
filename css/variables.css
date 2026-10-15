@@ -1,0 +1,15 @@
+﻿:root {
+    --wine: #4b0718;
+    --wine-dark: #28050e;
+    --wine-light: #762438;
+    --ivory: #f6f0eb;
+    --paper: #eee4dc;
+    --ink: #3d2427;
+    --muted: #846d68;
+    --gold: #b29a7d;
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --script: "Great Vibes", cursive;
+    --sans: "Montserrat", sans-serif;
+    --ease: cubic-bezier(.22, 1, .36, 1);
+    --transition: 450ms var(--ease);
+}

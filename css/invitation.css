@@ -1,0 +1,167 @@
+﻿/* PORTADA */
+#cover-screen { align-items: center; justify-content: center; color: var(--ivory); background: var(--wine); }
+#cover-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, #1b030b55, #28030dbb 55%, #23040de8), url("../assets/images/NOVIO.png") center/cover;
+    animation: float-fabric 16s ease-in-out infinite;
+}
+.cover-content { text-align: center; width: min(100%, 680px); padding: 60px 22px; }
+.cover-content h1 { font-size: clamp(39px, 9vw, 77px); line-height: 1.05; letter-spacing: .13em; margin: 10px 0; }
+.script-ampersand { font: clamp(55px, 9vw, 86px)/.9 var(--script); margin: 10px 0; }
+.cover-content > p { font: 9px/2 var(--sans); letter-spacing: .2em; margin: 30px 0; }
+.cover-content .outline-button { margin-top: 10px; }
+.corner-menu {
+    position: absolute;
+    z-index: 3;
+    top: 25px;
+    right: 25px;
+    width: 44px;
+    height: 44px;
+    color: var(--ivory);
+    border: 1px solid #ffffff80;
+    background: #30040f30;
+    font-size: 21px;
+}
+
+/* HISTORIA */
+#story-screen { background: var(--paper); }
+.editorial-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: clamp(30px, 7vw, 85px);
+}
+.editorial-copy h2 { text-transform: uppercase; }
+.editorial-copy > p:not(.handwritten) { font-size: 17px; line-height: 1.7; color: #6d5855; }
+.editorial-copy .handwritten { margin: 18px 0 28px; }
+#story-screen { display: none; grid-template-columns: .9fr 1.1fr; }
+#story-screen.active { display: grid; }
+.story-photo { min-height: 100vh; background-image: url("../assets/images/NOVIA.png"); }
+
+/* DETALLES */
+#details-screen { display: none; grid-template-columns: .8fr 1.2fr; background: var(--ivory); }
+#details-screen.active { display: grid; }
+.details-photo { min-height: 100vh; background-image: url("../assets/images/NOVIO.png"); }
+#details-screen .editorial-copy h2 { font-size: clamp(36px, 5vw, 58px); }
+#details-screen .editorial-copy > p { margin-bottom: 13px; }
+#details-screen .outline-button { margin: 18px 0; }
+
+/* PROGRAMA */
+#schedule-screen { display: none; grid-template-columns: 1fr 1fr; background: var(--paper); }
+#schedule-screen.active { display: grid; }
+.schedule-photo { min-height: 100vh; background-image: url("../assets/images/NOVIA.png"); }
+.timeline { width: 100%; margin: 18px 0; }
+.timeline p {
+    position: relative;
+    border-left: 1px solid #c6aaa3;
+    padding: 5px 0 18px 23px;
+    margin: 0;
+    font-size: 19px;
+}
+.timeline p::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 12px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--wine);
+}
+
+/* CONFIRMACION */
+#rsvp-screen {
+    align-items: center;
+    justify-content: center;
+    padding: 45px 22px;
+    background: linear-gradient(120deg, #28040eeb, #5b0b21e8), url("../assets/images/NOVIA.png") center/cover;
+    color: var(--ivory);
+}
+.rsvp-content { width: min(100%, 520px); }
+.rsvp-content h2 { font-size: clamp(42px, 7vw, 65px); }
+.rsvp-content > p { font-size: 17px; line-height: 1.6; color: #e3d3cd; }
+#rsvp-form { display: grid; gap: 10px; margin-top: 25px; }
+#rsvp-form label { margin-top: 8px; font: 8px var(--sans); letter-spacing: .17em; color: #e1c5bb; }
+#rsvp-form input, #rsvp-form select, #rsvp-form textarea {
+    width: 100%;
+    border: 1px solid #ffffff50;
+    border-radius: 0;
+    padding: 13px;
+    background: #ffffff0b;
+    color: white;
+    font: 14px var(--serif);
+}
+#rsvp-form select option { color: #301018; background: var(--ivory); }
+#rsvp-form input::placeholder, #rsvp-form textarea::placeholder { color: #c7aaa5; }
+#rsvp-form .primary-button { width: 100%; margin-top: 12px; }
+#rsvp-feedback { font-size: 14px; line-height: 1.6; margin-top: 15px; overflow-wrap: anywhere; }
+
+/* CIERRE */
+#closing-screen {
+    align-items: center;
+    justify-content: center;
+    color: var(--ivory);
+    text-align: center;
+    background: linear-gradient(140deg, #25040dcf, #5c0a20dd), url("../assets/images/NOVIO.png") center/cover;
+}
+.closing-content { padding: 40px 20px; }
+.closing-content h2 { font: 42px var(--script); margin: 28px 0 0; }
+.closing-monogram { font: 400 clamp(70px, 14vw, 120px)/1.15 var(--serif); margin: 10px 0; }
+.closing-content > p { font: 10px/1.8 var(--sans); letter-spacing: .12em; margin: 24px 0; }
+.closing-content .outline-button { margin-top: 12px; }
+
+/* MENU EMERGENTE */
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    background: #17030ab3;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition), visibility var(--transition);
+}
+.menu-overlay.open { opacity: 1; visibility: visible; }
+.menu-panel {
+    width: min(100%, 380px);
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    background: var(--ivory);
+    transform: translateX(35px);
+    transition: transform var(--transition);
+}
+.menu-overlay.open .menu-panel { transform: translateX(0); }
+.menu-panel > button:not(.menu-close) {
+    padding: 15px 0;
+    text-align: left;
+    border: 0;
+    border-bottom: 1px solid #d9c6ba;
+    background: transparent;
+    font-size: 22px;
+}
+.menu-close { align-self: flex-end; border: 0; background: transparent; font-size: 32px; }
+.music-toggle {
+    display: none;
+    position: fixed;
+    z-index: 50;
+    right: 20px;
+    bottom: 20px;
+    width: 47px;
+    height: 47px;
+    border: 1px solid #b29a7d;
+    border-radius: 50%;
+    background: var(--wine);
+    color: var(--ivory);
+    font-size: 23px;
+}
+.music-toggle.visible { display: block; }
+.music-toggle.is-playing { animation: pulse-dot 2s infinite; }
