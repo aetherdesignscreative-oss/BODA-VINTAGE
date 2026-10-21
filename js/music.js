@@ -1,4 +1,5 @@
-﻿/* REPRODUCTOR MUSICAL */
+﻿
+/* REPRODUCTOR MUSICAL */
 window.WeddingMusic = {
     audio: new Audio(),
     selectedIndex: -1,
@@ -7,7 +8,9 @@ window.WeddingMusic = {
     init() {
         this.audio.loop = true;
         this.audio.preload = "none";
+
         this.renderSongs();
+        this.updateControls();
 
         this.audio.addEventListener("play", () => {
             this.playing = true;
@@ -20,56 +23,110 @@ window.WeddingMusic = {
         });
 
         this.audio.addEventListener("error", () => {
-            App.toast("No se pudo reproducir el archivo. Comprueba que el MP3 exista en assets/music.");
+            this.playing = false;
+            this.updateControls();
+
+            if (typeof App !== "undefined" && App.toast) {
+                App.toast(
+                    "No se pudo reproducir el archivo. Comprueba que el MP3 exista en assets/music y que su nombre sea correcto."
+                );
+            }
         });
 
-        document.getElementById("music-toggle").addEventListener("click", () => {
-            this.toggle();
-        });
+        const toggleButton = document.getElementById("music-toggle");
+
+        if (toggleButton) {
+            toggleButton.addEventListener("click", () => {
+                this.toggle();
+            });
+        }
     },
 
     renderSongs() {
         const list = document.getElementById("song-list");
+
+        if (!list || !window.WEDDING || !Array.isArray(WEDDING.songs)) {
+            return;
+        }
+
         list.replaceChildren();
 
         WEDDING.songs.forEach((song, index) => {
             const button = document.createElement("button");
+
             button.type = "button";
             button.className = "song-option";
-            button.innerHTML = `
-                <span class="song-number">${String(index + 1).padStart(2, "0")}</span>
-                <span class="song-info">
-                    <strong></strong>
-                    <small></small>
-                </span>
-                <span class="song-play" aria-hidden="true">♫</span>
-            `;
 
-            button.querySelector("strong").textContent = song.title;
-            button.querySelector("small").textContent = song.artist;
-            button.addEventListener("click", () => this.select(index));
+            const number = document.createElement("span");
+            number.className = "song-number";
+            number.textContent = String(index + 1).padStart(2, "0");
+
+            const info = document.createElement("span");
+            info.className = "song-info";
+
+            const title = document.createElement("strong");
+            title.textContent = song.title;
+
+            const artist = document.createElement("small");
+            artist.textContent = song.artist;
+
+            info.append(title, artist);
+
+            const playIcon = document.createElement("span");
+            playIcon.className = "song-play";
+            playIcon.setAttribute("aria-hidden", "true");
+            playIcon.textContent = "＋";
+
+            button.append(number, info, playIcon);
+
+            button.addEventListener("click", () => {
+                this.select(index);
+            });
+
             list.appendChild(button);
         });
     },
 
     async select(index) {
         const song = WEDDING.songs[index];
-        if (!song) return;
+
+        if (!song || !song.file) {
+            return;
+        }
 
         this.selectedIndex = index;
-        this.audio.src = `assets/music/${song.file}`;
+
+        /* Cargar el MP3 desde assets/music/ */
+        this.audio.pause();
+        this.audio.src = `assets/music/${encodeURIComponent(song.file)
+            .replace(/%2F/gi, "/")}`;
         this.audio.load();
 
         document.querySelectorAll(".song-option").forEach((button, i) => {
-            button.classList.toggle("selected", i === index);
-            button.querySelector(".song-play").textContent =
-                i === index ? "♫" : "＋";
+            const selected = i === index;
+
+            button.classList.toggle("selected", selected);
+
+            const icon = button.querySelector(".song-play");
+
+            if (icon) {
+                icon.textContent = selected ? "♫" : "＋";
+            }
+
+            button.setAttribute("aria-pressed", String(selected));
         });
 
         try {
             await this.audio.play();
-        } catch {
-            App.toast("No se pudo iniciar la canción. Comprueba el archivo MP3 e inténtalo de nuevo.");
+        } catch (error) {
+            this.playing = false;
+            this.updateControls();
+
+            if (typeof App !== "undefined" && App.toast) {
+                App.toast(
+                    "No se pudo iniciar la canción. Verifica el nombre del archivo y la carpeta assets/music."
+                );
+            }
         }
 
         this.updateControls();
@@ -78,23 +135,51 @@ window.WeddingMusic = {
     async toggle() {
         if (this.playing) {
             this.audio.pause();
-        } else if (this.selectedIndex >= 0) {
+            return;
+        }
+
+        if (this.selectedIndex >= 0) {
             try {
                 await this.audio.play();
-            } catch {
-                App.toast("Selecciona una canción disponible para reproducir.");
+            } catch (error) {
+                if (typeof App !== "undefined" && App.toast) {
+                    App.toast(
+                        "No se pudo reproducir la canción seleccionada."
+                    );
+                }
             }
-        } else {
+
+            this.updateControls();
+            return;
+        }
+
+        if (typeof App !== "undefined" && App.toast) {
             App.toast("Elige primero una canción en el menú musical.");
+        }
+
+        if (typeof App !== "undefined" && App.navigate) {
             App.navigate("music");
         }
     },
 
     updateControls() {
         const button = document.getElementById("music-toggle");
+
+        if (!button) {
+            return;
+        }
+
         button.classList.toggle("is-playing", this.playing);
+
         button.textContent = this.playing ? "Ⅱ" : "♫";
-        button.setAttribute("aria-label", this.playing ? "Pausar música" : "Reproducir música");
-        button.title = this.playing ? "Pausar música" : "Reproducir música";
+
+        button.setAttribute(
+            "aria-label",
+            this.playing ? "Pausar música" : "Reproducir música"
+        );
+
+        button.title = this.playing
+            ? "Pausar música"
+            : "Reproducir música";
     }
 };
